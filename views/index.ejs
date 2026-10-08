@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Login</title>
 <style>
   * { box-sizing: border-box; }
@@ -176,19 +176,33 @@
     font-family: Georgia, 'Times New Roman', serif;
     line-height: 1;
   }
+    .back-arrow {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+  }
+  .back-arrow svg {
+    width: 18px;
+    height: 18px;
+  }
 </style>
 </head>
 <body>
 
 <div class="screen">
-  <div class="back-arrow">&#8592;</div>
+  <div class="back-arrow">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="20" y1="12" x2="4" y2="12"/>
+      <polyline points="11 5 4 12 11 19"/>
+    </svg>
+  </div>
 
   <div class="lang">
     English (UK)
     <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
   </div>
-
-  <div class="meta-logo">&infin;</div>
 
   <div class="insta-icon">
     <svg viewBox="0 0 96 96" fill="none">
