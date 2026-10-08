@@ -1,12 +1,16 @@
 const express = require('express');
 const User = require('./models/user'); // Import the User model
 const mongoose = require('mongoose');
+const path = require('path');
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.set('view engine', 'ejs');
+
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 
 
